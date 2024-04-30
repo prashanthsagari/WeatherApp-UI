@@ -1,13 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import { AuthenticationContext } from './AuthenticationContext';
 
 export default function Header() {
-  const authenticationContext = useContext(AuthenticationContext);
+  const [isLoggedIn, setIsLoggedIn] = useState('false');
+  //
+  useEffect(() => {
+    setIsLoggedIn(sessionStorage.getItem('isLoggedIn'));
+  }, []);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    setIsLoggedIn('false');
+    sessionStorage.setItem('isLoggedIn', 'false');
+    // sessionStorage.clear();
+    alert('logged out.');
+    // window.location.replace('/login');
+  };
+
   return (
     <div>
       <Navbar expand='lg' className='bg-body-tertiary'>
@@ -22,25 +35,40 @@ export default function Header() {
               <Link className='m-3' to='/'>
                 Home
               </Link>
-              {authenticationContext.val === false ? (
+
+              {isLoggedIn === 'false' ? (
+                <Link className='m-3' to='/add'>
+                  Register User
+                </Link>
+              ) : (
+                ''
+              )}
+
+              {isLoggedIn === 'true' ? (
+                <Link className='m-3' to='/dashboard'>
+                  Dashboard
+                </Link>
+              ) : (
+                ''
+              )}
+
+              {isLoggedIn === 'true' ? (
+                <Link className='m-3' to='/weather'>
+                  Get Weather
+                </Link>
+              ) : (
+                ''
+              )}
+
+              {isLoggedIn == 'false' ? (
                 <Link className='m-3' to='/login'>
                   Login
                 </Link>
               ) : (
-                <Link
-                  className='m-3'
-                  to='/login'
-                  onClick={authenticationContext.val === false}
-                >
+                <Link className='m-3' to='/login' onClick={handleLogout}>
                   Logout
                 </Link>
               )}
-              {/* <Link className='m-3' to='/dashboard'>
-                Dashboard
-              </Link>
-              <Link className='m-3' to='/add'>
-                Person
-              </Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>

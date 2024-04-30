@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import Header from './components/Header';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
+import Login from './components/Login/Login';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
-import Weather from './components/Weather';
-import Footer from './components/Footer';
-import UserRegistrationForm from './components/UserRegistrationForm';
+
+import UserRegistrationForm from './components/Registration/UserRegistrationForm';
+import Footer from './components/Footer/Footer';
+import Weather from './components/Weather/Weather';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path='/weather' element={<Weather />} />
           <Route path='/add' element={<UserRegistrationForm />} />
         </Routes>
-        <div className='mt-5'>
+        <div className='m-5'>
           <Footer />
         </div>
       </BrowserRouter>

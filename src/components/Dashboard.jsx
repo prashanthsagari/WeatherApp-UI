@@ -23,20 +23,34 @@ export default function Dashboard() {
 
   return (
     <>
-      Token : {authenticationContext.token} :{authenticationContext.val} :
-      <h1 className='container alert alert-primary m-5'>
-        This is a Dashboard Component
-      </h1>
-      <h2 className='container m-5'>Details</h2>
-      {person.map((item) => {
-        return (
-          <>
-            <h6 className='m-3' key={item.username}>
-              {item.username}
-            </h6>
-          </>
-        );
-      })}
+      <div className='border border-primary m-5'>
+        <h1 className='alert alert-primary m-5'>
+          This is a Dashboard Component
+        </h1>
+        <h4 className='container text-center'>Registered Users</h4>
+        <table className='table table-striped table-hover table-sm w-75 p-3 mx-auto'>
+          <thead className='table-dark'>
+            <tr>
+              <th scope='col'>User Name</th>
+              <th scope='col'>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {person.length !== 0
+              ? person.map((item) => {
+                  return (
+                    <>
+                      <tr key={item.userId}>
+                        <td className='m-5'>{item.username}</td>
+                        <td className='m-5'>{item.email}</td>
+                      </tr>
+                    </>
+                  );
+                })
+              : 'No Users Registered'}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

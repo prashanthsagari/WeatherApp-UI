@@ -52,24 +52,39 @@ export default function Weather() {
   return (
     <>
       <div>
-        <h1 className='container alert alert-primary m-5'>
+        <h4 className='container alert alert-primary m-6 text-center'>
           Get Weather Details
-        </h1>
+        </h4>
         <Formik
-          // pass the three functions which you have created above to Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          <Form className='m-5'>
-            {/*  write your form fields for the following here using label tag ,  Field component and  ErrorMessage component from Formik */}
-            <div>
-              <label htmlFor='location'>Name:</label>
-              <Field type='text' name='location' id='location' />
-              <ErrorMessage name='location' component='div' />
+          <Form className='m-5 border border-primary mx-6'>
+            <div className='row justify-content-md-center'>
+              <div className='col-sm-12 col-md-6 form-group mx-sm-3 mt-4'>
+                <label htmlFor='location' className='col-4 m-2'>
+                  Name:
+                </label>
+                <Field
+                  type='text'
+                  name='location'
+                  id='location'
+                  className='col-6'
+                />
+                <ErrorMessage
+                  name='location'
+                  component='div'
+                  className='error text-center'
+                />
+              </div>
+              <button
+                type='submit'
+                className='btn btn-primary btn-sm col-6 m-4  align-items-center'
+              >
+                Submit
+              </button>
             </div>
-            <br />
-            <button type='submit'>Submit</button>
           </Form>
         </Formik>
       </div>
