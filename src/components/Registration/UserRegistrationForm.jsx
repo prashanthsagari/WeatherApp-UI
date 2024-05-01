@@ -49,7 +49,7 @@ const UserRegistrationForm = () => {
 
   return (
     <>
-      <div className='border border-primary'>
+      <div className='contain border border-primary mx-auto'>
         <h3 className='text-center mt-4'>User Registration Form </h3>
         {submitted === false ? (
           <Formik

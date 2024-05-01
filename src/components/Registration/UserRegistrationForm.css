@@ -5,3 +5,7 @@
 .success {
   color: green;
 }
+
+.contain {
+  width: 80%;
+}

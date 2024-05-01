@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState('false');
-  //
+
   useEffect(() => {
     setIsLoggedIn(sessionStorage.getItem('isLoggedIn'));
   }, []);
@@ -16,16 +16,14 @@ export default function Header() {
     sessionStorage.removeItem('token');
     setIsLoggedIn('false');
     sessionStorage.setItem('isLoggedIn', 'false');
-    // sessionStorage.clear();
     alert('logged out.');
-    // window.location.replace('/login');
   };
 
   return (
     <div>
       <Navbar expand='lg' className='bg-body-tertiary'>
         <Container>
-          <Navbar.Brand href='#home'>Weather App</Navbar.Brand>
+          <Navbar.Brand href='/'>Weather App</Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
@@ -60,13 +58,13 @@ export default function Header() {
                 ''
               )}
 
-              {isLoggedIn == 'false' ? (
-                <Link className='m-3' to='/login'>
-                  Login
-                </Link>
-              ) : (
+              {isLoggedIn == 'true' ? (
                 <Link className='m-3' to='/login' onClick={handleLogout}>
                   Logout
+                </Link>
+              ) : (
+                <Link className='m-3' to='/login'>
+                  Login
                 </Link>
               )}
             </Nav>
