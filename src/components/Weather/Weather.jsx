@@ -21,6 +21,9 @@ export default function Weather() {
   });
 
   const onSubmit = (value) => {
+    document.getElementById('error').textContent = '';
+    if (document.getElementById('bookmark'))
+      document.getElementById('bookmark').hidden = false;
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -34,7 +37,6 @@ export default function Weather() {
       )
       .then((response) => {
         console.log('Response:', response.data);
-        debugger;
         if (response.data.success === false) {
           document.getElementById('error').textContent =
             response.data.error.info;
@@ -74,6 +76,7 @@ export default function Weather() {
                 />
                 <ErrorMessage
                   name='location'
+                  id='location'
                   component='div'
                   className='error text-center'
                 />
@@ -89,7 +92,10 @@ export default function Weather() {
         </Formik>
       </div>
       <ShowWeather loc={loc} weath={weath} />
-      <div id='error' className='error'></div>
+      <div
+        id='error'
+        className='error text-center border border-warning w-50 mx-auto'
+      ></div>
     </>
   );
 }

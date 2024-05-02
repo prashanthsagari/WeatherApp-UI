@@ -14,6 +14,7 @@ export default function Header() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
     setIsLoggedIn('false');
     sessionStorage.setItem('isLoggedIn', 'false');
     alert('logged out.');
@@ -34,12 +35,12 @@ export default function Header() {
                 Home
               </Link>
 
-              {isLoggedIn === 'false' ? (
+              {isLoggedIn === 'true' ? (
+                ''
+              ) : (
                 <Link className='m-3' to='/add'>
                   Register User
                 </Link>
-              ) : (
-                ''
               )}
 
               {isLoggedIn === 'true' ? (
@@ -53,6 +54,14 @@ export default function Header() {
               {isLoggedIn === 'true' ? (
                 <Link className='m-3' to='/weather'>
                   Get Weather
+                </Link>
+              ) : (
+                ''
+              )}
+
+              {isLoggedIn === 'true' ? (
+                <Link className='m-3' to='/favorites'>
+                  Favorites
                 </Link>
               ) : (
                 ''

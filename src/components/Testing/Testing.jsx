@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import * as Yup from 'yup';
 
-function BasicModal(props) {
+function Testing(props) {
   let initialValues = {
     username: props.data.username,
     email: props.data.email,
@@ -43,28 +43,29 @@ function BasicModal(props) {
           <Modal.Title>Update User Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          asdf
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
           >
-            <Form>
+            <Form method='POST'>
               <div className='row justify-content-md-center align-items-center'>
-                <div className='col-sm-12 col-md-6 form-group mx-sm-3 mb-2'>
-                  <label htmlFor='username' className='col-8 m-2'>
-                    username : <em>{props.data.username}</em>
+                <div className='col-sm-12 col-md-6 form-group mx-sm-3 mb-4'>
+                  <label htmlFor='username' className='col-4 m-2'>
+                    Name: {props.data.username}
                   </label>
                 </div>
 
-                <div className='col-sm-12 col-md-6 form-group mx-sm-3 mb-2'>
-                  <label htmlFor='email' className='col-2 m-2'>
-                    Email
+                <div className='col-sm-12 col-md-6 form-group mx-sm-3 mb-4'>
+                  <label htmlFor='email' className='col-4 m-2'>
+                    Email:
                   </label>
                   <Field
                     type='email'
                     name='email'
                     id='email'
-                    className='col-8'
+                    className='col-6'
                   />
                   <ErrorMessage
                     name='email'
@@ -89,4 +90,4 @@ function BasicModal(props) {
   );
 }
 
-export default BasicModal;
+export default Testing;

@@ -21,19 +21,18 @@ export default function Login() {
   });
 
   const onSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
     axios
       .post('http://localhost:7071/user-profile/login', values)
       .then((response) => {
         console.log('Response:', response.data);
+        alert(JSON.stringify(response.data));
         sessionStorage.setItem('token', response.data.token);
         sessionStorage.setItem('isLoggedIn', 'true');
-        alert(response.data.message);
+        sessionStorage.setItem('username', response.data.username);
         window.location.href = '/dashboard';
       })
       .catch((error) => {
         console.error('Error:', error);
-        alert(error.response.data.message);
         document.getElementById('failed').textContent =
           error.response.data.message;
         // sessionStorage.setItem('isLoggedIn', 'false');

@@ -9,6 +9,8 @@ import UserRegistrationForm from './components/Registration/UserRegistrationForm
 import Footer from './components/Footer/Footer';
 import Weather from './components/Weather/Weather';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import Testing from './components/Testing/Testing';
+import Bookmark from './components/Bookmark/Bookmark';
 
 function App() {
   useEffect(() => {
@@ -32,8 +34,10 @@ function App() {
             path='/weather'
             element={isLoggedIn == 'true' ? <Weather /> : <Login />}
           />
+          <Route path='/favorites' element={<Bookmark />} />
           <Route path='/add' element={<UserRegistrationForm />} />
           <Route path='/logout' element={<Login />} />
+          <Route path='/test' element={<Testing />} />
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
         <div className='m-5'>
