@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 function ShowWeather(props) {
   const [username, setUsername] = useState();
+  const [jwtToken, setJwtToken] = useState(sessionStorage.getItem('token'));
   useEffect(() => {
     setUsername(sessionStorage.getItem('username'));
   }, []);
@@ -17,10 +18,11 @@ function ShowWeather(props) {
       (favObject.weather = props.weath),
       (favObject.id = uuidv4());
     axios
-      .post(
-        `http://localhost:8083/bookmark/store?username=${username}`,
-        favObject
-      )
+      .post(`/api/bookmark/store?username=${username}`, favObject, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
       .then((response) => {
         console.log('Response:', response.data);
         alert('Bookmark Saved !!!');

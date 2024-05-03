@@ -13,6 +13,7 @@ export default function Weather() {
   const [weath, setWeath] = useState([]);
 
   const [loc, setLoc] = useState([]);
+  const [jwtToken, setJwtToken] = useState(sessionStorage.getItem('token'));
 
   const validationSchema = Yup.object().shape({
     location: Yup.string()
@@ -29,12 +30,11 @@ export default function Weather() {
     };
 
     axios
-      .get(
-        `http://localhost:8082/weather/weather-by-city-name?query=${value.location}`,
-        {
-          timeout: 5000,
-        }
-      )
+      .get(`/api/weather/weather-by-city-name?query=${value.location}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
       .then((response) => {
         console.log('Response:', response.data);
         if (response.data.success === false) {

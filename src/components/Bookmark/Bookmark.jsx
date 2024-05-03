@@ -5,6 +5,7 @@ import './Bookmark.css';
 function Bookmark() {
   const [favorites, setFavorites] = useState();
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
+  const [jwtToken, setJwtToken] = useState(sessionStorage.getItem('token'));
 
   useEffect(() => {
     getBookmarks();
@@ -12,7 +13,11 @@ function Bookmark() {
 
   const getBookmarks = () => {
     axios
-      .get(`http://localhost:8083/bookmark/bookmarks/${username}`)
+      .get(`/api/bookmark/bookmarks/${username}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
       .then((response) => {
         const data = response.data;
         console.log(JSON.stringify(data));
@@ -25,9 +30,11 @@ function Bookmark() {
 
   const deleteBookmark = (id) => {
     axios
-      .delete(
-        `http://localhost:8083/bookmark/delete?username=${username}&id=${id}`
-      )
+      .delete(`/api/bookmark/delete?username=${username}&id=${id}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
       .then((response) => {
         const data = response.data;
         console.log(data);

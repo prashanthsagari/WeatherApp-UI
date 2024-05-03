@@ -17,6 +17,8 @@ export default function Header() {
     sessionStorage.removeItem('username');
     setIsLoggedIn('false');
     sessionStorage.setItem('isLoggedIn', 'false');
+    sessionStorage.clear();
+    window.history.go(-(window.history.length - 1));
     alert('logged out.');
   };
 
@@ -31,20 +33,20 @@ export default function Header() {
               {/* <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#link">Login</Nav.Link>
               <Nav.Link href="#link">Dashboard</Nav.Link> */}
-              <Link className='m-3' to='/'>
+              <Link className='m-3 text-decoration-none' to='/'>
                 Home
               </Link>
 
               {isLoggedIn === 'true' ? (
                 ''
               ) : (
-                <Link className='m-3' to='/add'>
+                <Link className='m-3 text-decoration-none' to='/add'>
                   Register User
                 </Link>
               )}
 
               {isLoggedIn === 'true' ? (
-                <Link className='m-3' to='/dashboard'>
+                <Link className='m-3 text-decoration-none' to='/dashboard'>
                   Dashboard
                 </Link>
               ) : (
@@ -52,7 +54,7 @@ export default function Header() {
               )}
 
               {isLoggedIn === 'true' ? (
-                <Link className='m-3' to='/weather'>
+                <Link className='m-3 text-decoration-none' to='/weather'>
                   Get Weather
                 </Link>
               ) : (
@@ -60,19 +62,27 @@ export default function Header() {
               )}
 
               {isLoggedIn === 'true' ? (
-                <Link className='m-3' to='/favorites'>
+                <Link className='m-3 text-decoration-none' to='/favorites'>
                   Favorites
                 </Link>
               ) : (
                 ''
               )}
 
+              <Link className='m-3 text-decoration-none' to='/contact'>
+                Contact Us
+              </Link>
+
               {isLoggedIn == 'true' ? (
-                <Link className='m-3' to='/login' onClick={handleLogout}>
+                <Link
+                  className='m-3 text-decoration-none'
+                  to='/login'
+                  onClick={handleLogout}
+                >
                   Logout
                 </Link>
               ) : (
-                <Link className='m-3' to='/login'>
+                <Link className='m-3 text-decoration-none' to='/login'>
                   Login
                 </Link>
               )}

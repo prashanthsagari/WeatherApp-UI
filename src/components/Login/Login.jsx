@@ -2,7 +2,6 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-
 import './Login.css';
 
 export default function Login() {
@@ -19,22 +18,22 @@ export default function Login() {
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
   });
-
+  // working url http://localhost:7071/user-profile/login
   const onSubmit = (values) => {
     axios
-      .post('http://localhost:7071/user-profile/login', values)
+      .post('/api/user-profile/login', values)
       .then((response) => {
         console.log('Response:', response.data);
-        alert(JSON.stringify(response.data));
         sessionStorage.setItem('token', response.data.token);
         sessionStorage.setItem('isLoggedIn', 'true');
         sessionStorage.setItem('username', response.data.username);
         window.location.href = '/dashboard';
       })
       .catch((error) => {
+        debugger;
         console.error('Error:', error);
         document.getElementById('failed').textContent =
-          error.response.data.message;
+          error?.response?.data?.message;
         // sessionStorage.setItem('isLoggedIn', 'false');
       });
   };
