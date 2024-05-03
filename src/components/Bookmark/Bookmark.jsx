@@ -84,10 +84,7 @@ function Bookmark() {
                     <h5 className='card-title'>
                       {item.weather.weather_descriptions}
                     </h5>
-                    <p className='card-text'>
-                      {' '}
-                      Search location {item.location.name}
-                    </p>
+                    <p className='card-text'>{item.location.name}</p>
                   </div>
                 </div>
               </>

@@ -140,7 +140,7 @@ const UserRegistrationForm = () => {
           <div className='success text-center'>
             User Registered Successfully.{' '}
             <Link className='m-3' to='/login'>
-              Add another user.
+              Go to Login
             </Link>
           </div>
         )}
