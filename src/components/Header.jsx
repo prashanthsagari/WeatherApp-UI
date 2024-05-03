@@ -18,11 +18,9 @@ export default function Header() {
     sessionStorage.removeItem('username');
     setIsLoggedIn('false');
     sessionStorage.setItem('isLoggedIn', 'false');
-    // sessionStorage.clear();
-    window.history.go(-(window.history.length - 1));
+    sessionStorage.clear();
     const history = createBrowserHistory();
-    history.go(-1);
-    alert('logged out.');
+    history.go(0);
   };
 
   return (
