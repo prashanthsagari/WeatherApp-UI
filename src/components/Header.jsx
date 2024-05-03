@@ -1,3 +1,4 @@
+import { createBrowserHistory } from 'history';
 import React, { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -17,8 +18,10 @@ export default function Header() {
     sessionStorage.removeItem('username');
     setIsLoggedIn('false');
     sessionStorage.setItem('isLoggedIn', 'false');
-    sessionStorage.clear();
+    // sessionStorage.clear();
     window.history.go(-(window.history.length - 1));
+    const history = createBrowserHistory();
+    history.go(-1);
     alert('logged out.');
   };
 

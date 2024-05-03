@@ -7,10 +7,16 @@ export default function Dashboard() {
   const [person, setPerson] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editPerson, setEditPerson] = useState();
+  const [username, setUsername] = useState(sessionStorage.getItem('username'));
+  const [jwtToken, setJwtToken] = useState(sessionStorage.getItem('token'));
 
   const getUsersData = () => {
     axios
-      .get('http://localhost:7071/user-profile/users')
+      .get('/api/user-profile/users', {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
       .then((response) => {
         const data = response.data;
         setPerson(data);
@@ -31,7 +37,11 @@ export default function Dashboard() {
 
   const deleteUser = (username) => {
     axios
-      .delete(`http://localhost:7071/user-profile/delete-user/${username}`)
+      .delete(`/api/user-profile/delete-user/${username}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -39,6 +49,7 @@ export default function Dashboard() {
       })
       .catch((error) => {
         console.error('Error:', error);
+        alert(error?.response?.data);
       });
   };
 
